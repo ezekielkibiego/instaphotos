@@ -8,6 +8,8 @@
   
 # Description  
 
+This is an Instagram clone that allows the user(s) to create an account, log in and create a profile. A user(s) can upload photos to the site and also be able to delete them as well as like other users' photos.
+
 ##  Live Link  
  
  https://instaphotos.herokuapp.com/
