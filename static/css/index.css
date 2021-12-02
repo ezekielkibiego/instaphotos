@@ -4,7 +4,11 @@ h1
 }
 
 body{
-    background: whitesmoke;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', global_font_string;
+    font-weight: 400;
+    background-color: whitesmoke;
 }
 #insta{
     font-family: 'Open Sans Condensed', sans-serif;
