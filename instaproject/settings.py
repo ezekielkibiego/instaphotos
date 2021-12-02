@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import cloudinary
+import cloudinary_storage
+import cloudinary.uploader
+import cloudinary.api
 
 SECRET_KEY = config('SECRET_KEY')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,12 +33,25 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+cloudinary.config(
+    cloud_name = config('CD_NAME'),
+    api_key= config('CD_API'),
+    api_secret=config('CD_SECRET'),
+    secure = config('CD_SECURE')
+)
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME':config('CD_NAME'),
+    'API_KEY': config('CD_API'),
+    'API_SECRET':config('CD_SECRET'),
+    'SECURE':config('CD_SECURE')
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Application definition
 
 INSTALLED_APPS = [
     'instaapp.apps.InstaappConfig',
     'bootstrap4',
+    'cloudinary_storage',
     'cloudinary',
     'django.contrib.admin',
     'django.contrib.auth',
