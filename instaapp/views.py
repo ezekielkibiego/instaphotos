@@ -8,7 +8,7 @@ def welcome(request):
 
 def index(request):
 
-    image = Images.objects.all().order_by('-id')
+    Image = Images.objects.all().order_by('-id')
 
-    return render(request, 'all-insta/index.html',{'image':image})
+    return render(request, 'all-insta/index.html',{'Image':Image})
    
