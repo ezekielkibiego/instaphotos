@@ -1,8 +1,14 @@
 h1
 {
-  color: green;
+  color: black;
 }
 
 body{
     background: whitesmoke;
+}
+#insta{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Shalimar', cursive;
+    font-size: 25px;
+    font-weight: 600;
 }
