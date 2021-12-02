@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-sm fixed-top" style="background-color: white; border: 2px solid rgba(245, 245, 245, 0.123);">
+    <a class="navbar-brand" href="/" style=" color: black; font-style: italic; font-weight: 600; font-family: -apple-system">Instagram</a>
+    
+
+    <div class=" navbar-collapse" id="">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/admin" style=" color: black;">Dashboard</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" style=" color: black;">
+                    Location
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/?location={{location.id}}"></a>
+
+                </div>
+            </li>
+
+        </ul>
+
+        <div class="col-sm-4 col-md-4 navbar-right">
+
+            <form class="navbar-form" role="search" action="">
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="images">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="fa fa-search text-dark"
+                                aria-hidden="true"></i>
+                        </button>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <!-- search form end -->
+    </div>
+</nav>
