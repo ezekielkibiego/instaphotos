@@ -39,7 +39,7 @@
   
 ##### Clone the repository:  
  ```bash 
- git@github.com:ezekielkibiego/instaphotos.git 
+ git@github.com:ezekielkibiego/instaphotos.git
 ```
 ##### Navigate into the folder and install requirements  
  ```bash 
