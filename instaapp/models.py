@@ -3,7 +3,7 @@ import datetime as dt
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 from django.db.models.fields import related
-
+from tinymce.models import HTMLField
 
 class Images(models.Model):
     user = models.ForeignKey(
@@ -92,3 +92,13 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.comment
+
+class Profiles(models.Model):
+    profile_photo = CloudinaryField('image')
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    posts = HTMLField()
+    followers = models.IntegerField(default=0)
+    following = models.IntegerField(default=0)
+    message = models.IntegerField(default=0)
+    follow = models.IntegerField(default=0)
+    
