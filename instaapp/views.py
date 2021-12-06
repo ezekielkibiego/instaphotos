@@ -1,10 +1,14 @@
 from cloudinary.models import CloudinaryField
 from django.shortcuts import redirect, render
 from django.http  import HttpResponse
-from .models import Images,Profile
-# import cloudinary.uploader
+
+import cloudinary
+import cloudinary.uploader
 import cloudinary.api
-from django.contrib.auth.decorators import login_required
+from instaapp.forms import PicImageForm
+from .models import Image, Like,Profile
+import cloudinary.api
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 def welcome(request):
     return HttpResponse('Welcome to Instaphotos')
@@ -12,16 +16,23 @@ def welcome(request):
 @login_required(login_url='/accounts/login/')
 def index(request):
 
-    Image = Images.objects.all().order_by('-id')
-
-    return render(request, 'all-insta/index.html',{'Image':Image})
+    Images = Image.objects.all().order_by('-id')
+  
+    return render(request, 'all-insta/index.html',{'Images':Images})
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
     current_user = request.user
-    images = Images.objects.filter(user_id=current_user.id)
+    images = Image.objects.filter(user_id=current_user.id)
     profile = Profile.objects.filter(user_id=current_user.id).first()
-    return render(request, 'profile.html', {"images": images, "profile": profile})
+    form = PicImageForm()
+    if request.method == 'POST':
+        form = PicImageForm (request.POST , request.FILES)
+        if form.is_valid():
+            form.instance.user = request.user
+            form.save()
+        redirect('profile')
+    return render(request, 'profile.html', {"images": images, "profile": profile, 'form':form})
 
 @login_required(login_url='/accounts/login/')
 def save_image(request):
@@ -31,9 +42,50 @@ def save_image(request):
         image_file = request.FILES['image_file']
         image_file = CloudinaryField.uploader.upload(image_file)
         image_url = image_file['url']
-        image = Images(name=name, caption=caption, image=image_url,
+        image = Image(name=name, caption=caption, image=image_url,
                       profile_id=request.POST['user_id'], user_id=request.POST['user_id'])
         image.save_image()
         return redirect('/profile', {'success': 'Image Uploaded Successfully'})
     else:
         return render(request, 'profile.html', {'danger': 'Image Upload Failed'})
+
+@login_required
+def search(request):
+  if 'search_user' in request.GET and request.GET["search_user"]:
+    search_term = request.GET.get('search_user')
+    users = Profile.search_profiles(search_term)
+    photos = Image.search_photos(search_term)
+    return render(request,'search.html',{"users":users,"photos":photos})
+  else:
+    return render(request,'search.html')
+
+@login_required
+def users_profile(request,pk):
+  
+  user = user_passes_test.objects.get(pk = pk)
+  photos = Image.objects.filter(user = user)
+  c_user = request.user
+  
+  return render(request,'user_profile.html',{"user":user,
+  "photos":photos,"c_user":c_user})
+
+def like_image(request):
+    user = request.user
+    if request.method == 'POST':
+        image_id = request.POST.get('image_id')
+        image_pic =Image.objects.get(id=image_id)
+        if user in image_pic.liked.all():
+            image_pic.liked.add(user)
+        else:
+            image_pic.liked.add(user)    
+            
+        like,created =Like.objects.get_or_create(user=user, image_id=image_id)
+        if not created:
+            if like.value =='Like':
+               like.value = 'Unlike'
+        else:
+               like.value = 'Like'
+
+        like.save()       
+    return redirect('index')
+
