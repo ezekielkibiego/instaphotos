@@ -9,7 +9,7 @@
             <form class="navbar-form" role="search" action="">
 
                 <div class="input-group">
-                    <input  type="text" class="form-control rounded-pill" placeholder="Search" style="font-weight: 700 "
+                    <input  type="text" class="form-control" placeholder="Search" style="font-weight: 700 "
                         name="images" />
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="submit">
@@ -23,14 +23,13 @@
 
         </div>
 
-        <div>
-            <img class="text-white" src="https://img.icons8.com/m_outlined/2x/home--v2.png" alt="" style="width: 8%;">
-            <img class="text-white" src="https://img.icons8.com/ios7/2x/facebook-messenger.png" alt=""
-                style="width: 8%;">
-            <img class="text-white" src="https://img.icons8.com/m_outlined/2x/plus-2-math.png" alt=""
-                style="width: 8%;">
-            <img class="text-white" src="https://img.icons8.com/ios11/2x/compass.png" alt="" style="width: 8%;">
-            <img class="text-white" src="https://img.icons8.com/win10/2x/like.png" alt="" style="width: 8%;">
+        <div class="icons">
+            <a class=""href="/"><img class="text-white" src="https://img.icons8.com/m_outlined/2x/home--v2.png" alt="" style="width: 8%;"></a>
+            <a class=""href="/"><img class="text-white" src="https://img.icons8.com/ios7/2x/facebook-messenger.png" alt=""
+                style="width: 8%;"></a>
+            <a class=""href="/"><img class="text-white" src="https://img.icons8.com/m_outlined/2x/plus-2-math.png" alt="" style="width: 8%;"></a>
+            <a class=""href="/"><img class="text-white" src="https://img.icons8.com/ios11/2x/compass.png" alt="" style="width: 8%;"></a>
+            <a class=""href="/"><img class="text-white" src="https://img.icons8.com/win10/2x/like.png" alt="" style="width: 8%;"></a>
         </div>
 
         <div class=" ">
@@ -42,7 +41,7 @@
                         aria-expanded="false" style="font-weight: 700;"><i class="far fa-user"></i>
                         <span class="caret"></span>
                     </a>
-                    <ul class="dropdown-menu btn btn-default" role="menu" style="font-weight: 700;">
+                    <ul class="dropdown-menu btn btn-default" role="menu" style="font-weight: 700; ">
                         <li>
                             <a class='btn btn-default' href="/profile" style="font-weight: 700;">Profile</a>
                         </li>
@@ -73,25 +72,5 @@
             {% endif %}
         </div>
     </div>
-    <ul>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
-                    <span class="caret"></span>
-                </a>
-          <ul class="dropdown-menu" role="menu">
-            <li>
-              <a href="{%url 'profile'%}">Home</a>
-            </li>
-            <li>
-              <a href="{%url 'new-post'%}">Create Article</a>
-            </li>
-            <li>
-              <a href="/accounts/password/change">Change Password</a>
-            </li>
-            <li>
-              <a href="/logout">Logout</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
+   
 </nav>
