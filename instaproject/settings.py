@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'bootstrap4',
     'cloudinary_storage',
     'cloudinary',
+    'tinymce',
+    'fontawesomefree',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
