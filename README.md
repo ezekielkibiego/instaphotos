@@ -16,21 +16,20 @@ This is an Instagram clone that allows the user(s) to create an account, log in 
   
 ## Screenshots 
 
-###### Home page
-
-<img src="">
+<img src="static/images/Screenshot (1).png">
  
  
+ <img src="static/images/Screenshot (3).png">
+
  
- <img src="">
 
- ###### Search 
+<img src="static/images/Screenshot (2).png">
 
-<img src="">
-
- ###### Image Details 
  
-<img src="">
+<img src="static/images/Screenshot (4).png">
+<img src="static/images/Screenshot (5).png">
+<img src="static/images/Screenshot (6).png">
+ 
  
 ## User Story  
   

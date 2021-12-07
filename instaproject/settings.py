@@ -12,15 +12,21 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
-from decouple import config
+import django_heroku
+import dj_database_url
+from decouple import config,Csv
 import cloudinary
 import cloudinary_storage
 import cloudinary.uploader
 import cloudinary.api
 
+
+MODE=config("MODE", default="dev")
 SECRET_KEY = config('SECRET_KEY')
+DEBUG = os.environ.get('DEBUG', True)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -40,19 +46,19 @@ cloudinary.config(
     api_secret=config('CD_SECRET'),
     secure = config('CD_SECURE')
 )
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME':config('CD_NAME'),
-    'API_KEY': config('CD_API'),
-    'API_SECRET':config('CD_SECRET'),
-    'SECURE':config('CD_SECURE')
-}
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-# Application definition
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME':config('CD_NAME'),
+#     'API_KEY': config('CD_API'),
+#     'API_SECRET':config('CD_SECRET'),
+#     'SECURE':config('CD_SECURE')
+# }
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# # Application definition
 
 INSTALLED_APPS = [
     'instaapp.apps.InstaappConfig',
     'bootstrap4',
-    'cloudinary_storage',
+    # 'cloudinary_storage',
     'cloudinary',
     'tinymce',
     'crispy_forms',
@@ -66,6 +72,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -149,9 +156,21 @@ LOGIN_REDIRECT_URL = 'index'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+
 ]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# Default primary key field type
+# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+django_heroku.settings(locals())
