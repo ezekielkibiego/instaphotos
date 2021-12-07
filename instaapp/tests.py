@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from instaapp.models import Image,User
+from instaapp.models import Image, Profile,User
 
 class ImageTestCase(TestCase):
     def setUp(self):
@@ -20,3 +20,15 @@ class ImageTestCase(TestCase):
     def test_image_name(self):
         image = Image.objects.get(photo_name='test_image')
         self.assertEqual(image.photo_name, 'test_image')
+
+    def test_image_id(self):
+        user = User.objects.create(
+            username='newuser',
+            
+        )
+        photo = Image.objects.create(
+            photo_caption='test post',
+            image='https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Kenya.svg',
+            
+            user_id=user.id
+        )
