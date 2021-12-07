@@ -88,6 +88,7 @@
 
                 {% endfor %}
             </div>
+            <p>{{pic.posted_at|timesince}} ago</p>
             <form action="{% url 'comments' image_id=pic.id%}" class="comment-form com" method="post"
                 enctype="multipart/form-data" style="width: 50%; margin-left: 17%;">
                 {% csrf_token%}
