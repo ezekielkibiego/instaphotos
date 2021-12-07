@@ -1,35 +1,28 @@
-{% extends 'base.html' %}
+{{% extends "all-insta/base.html" %}
 
 {% block content %}
+<br><br><br>
+<br><br><br>
+<div class="container">
 
-<div class="container-fluid">
   <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6 search text-center">
+  {% if search_photo %}
+    <h2>Found {{ search_photo|length }} of search user {{message}}</h2>
+  {% else %}
+    <h2> Found 0 images for the search term {{message}}</h2>
+  {% endif %}
+</div>
 
-
-      {% if users%}
-      <h2 class="text-center">Found {{ users|length }} person(s)</h2>
-      {% else %}
-      <h2 class="text-center"> Found 0 results</h2>
-      {% endif %}
-      {% for person in users %}
-      <p><a class="text-primary" href="{% url 'users_profile' person.user.id  %}"><span
-            class="font-weight-bold">{{person.user.username}}</span></a></p>
-            {% if person.user.profile.profile_photo.url %}
-      <p><a href="{% url 'users_profile' person.user.id  %}">
-          <img src="{{person.user.profile.profile_photo.url}}" style="height: 20vh; width:20vh;border-radius:50%"
-            class="rounded-circle border" alt="img" width="50" height="50">
-        </a></p>
-        {% else %}
-        <i class="fa fa-user" aria-hidden="true"></i>
-        {% endif %}
-      {% endfor %}
-    </div>
-    <div class="col-md-3"></div>
+  <div class="row">
+    {% for photo in search_photo %}
+      <div class="col-sm-6">
+        <img height="300" width="400" src = '{{photo.image.url}}'>
+      </div>
+      <div class="col-sm-6">
+        <h2>{{photo.photo_name}}</h2>
+        <p>{{photo.photo_caption}}</p>
+      </div>
+    {% endfor %}
   </div>
 </div>
-</div>
-
-
 {% endblock %}
