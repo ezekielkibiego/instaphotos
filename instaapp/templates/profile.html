@@ -58,6 +58,28 @@
             </div>
             <div class="modal-footer">
 </section>
+<div class="container">
+    <h3>posts</h3>
+        {% for image in images %}
+        <div class="">
+            <h3>{{ image.photo_name }}</h3>
+            
+                <div class="">
+                    <img src="{{ image.image.url }}" class="images" alt="Image">
+                </div>
+                <p>{{ image.photo_caption }}</p>
+                <p>{{ image.posted_at }}</p>
 
+        </div>
+        {% empty %}
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="alert alert-info" role="alert">
+                No images!
+            </div>
+        </div>
+        {% endfor %}
+
+</div>
 {% endblock %}
 
