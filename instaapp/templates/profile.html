@@ -37,7 +37,7 @@
     </div>
     <div class="col-md-12">
         <div class = "" data-toggle ="modal" data-target="#showPicModal">
-            <button>Update Profile</button>
+            <button>Add Post</button>
         </div>
     </div>
     <div class="modal fade" id="showPicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -53,7 +53,7 @@
               <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form }}
-                <button type="submit">Update Profile</button>
+                <button type="submit">Add Post</button>
               </form>
             </div>
             <div class="modal-footer">
