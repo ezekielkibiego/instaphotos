@@ -14,3 +14,7 @@ class PicImageForm(forms.ModelForm):
         fields = ['photo_name','photo_caption','image']
 
 
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model=Comment        
+        fields=['comment']
