@@ -31,9 +31,9 @@ class Image(models.Model):
       return self.photolikes.count()
     
     @classmethod
-    def search_photos(cls,search_term):
-      photos = cls.objects.filter(photo_name__icontains = search_term).all()
-      return photos
+    def search_by_photo_name(cls,search_term):
+        instaapp = cls.objects.filter(photo_name__icontains=search_term)
+        return instaapp
     
     def delete_post(self):
       self.delete()
@@ -76,14 +76,7 @@ class Profile(models.Model):
 
 
 
-    @classmethod
-    def search_profiles(cls,search_term):
-      profiles = cls.objects.filter(user__username__icontains = search_term).all()
-      return profiles
-
-    def __str__(self):
-      return "%s profile" % self.user
-
+    
 
 class Follow(models.Model):
   follower = models.ForeignKey(Profile, related_name='following',on_delete = models.CASCADE)
@@ -104,14 +97,28 @@ class Like(models.Model):
     def _str_(self):
         return self.value
 
-class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ForeignKey(Image, on_delete=models.CASCADE)
-    comment = models.CharField(max_length=50)
-    comment_date = models.DateTimeField(auto_now_add=True,null=True)
+# class Comment(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     image = models.ForeignKey(Image, on_delete=models.CASCADE)
+#     comment = models.CharField(max_length=50)
+#     comment_date = models.DateTimeField(auto_now_add=True,null=True)
 
-    def save_comment(self):
-        self.save()
+#     def save_comment(self):
+#         self.save()
+
+#     def __str__(self):
+#         return self.comment
+
+class Comment(models.Model):
+    image = models.ForeignKey(Image,on_delete=models.CASCADE,related_name='comments',null=True)
+    name = models.CharField(max_length=80,null=True)
+    body = models.TextField(default=False)
+    created_on = models.DateTimeField(auto_now_add=True,null=True)
+    active = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['created_on']
 
     def __str__(self):
-        return self.comment
+        return 'Comment {} by {}'.format(self.body, self.name)
+
