@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-from instaapp.forms import PicImageForm
+from instaapp.forms import CommentForm, PicImageForm
 from .models import Image, Like,Profile
 import cloudinary.api
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -18,8 +18,18 @@ def welcome(request):
 def index(request):
 
     Images = Image.objects.all().order_by('-id')
+    if request.method == 'POST':  
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            com = form.save(commit=False)
+            com.user = request.user
+            com.save()
+            return redirect('index')
+    
+    else:
+        form = CommentForm()
   
-    return render(request, 'all-insta/index.html',{'Images':Images})
+    return render(request, 'all-insta/index.html',{'Images':Images,'form':form})
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
@@ -94,3 +104,17 @@ def like_image(request):
         like.save()       
     return redirect('index')
 
+@login_required
+def comments(request,image_id):
+  form = CommentForm()
+  image = Image.objects.filter(pk = image_id).first()
+  if request.method == 'POST':
+    form = CommentForm(request.POST)
+    if form.is_valid():
+      comment = form.save(commit = False)
+      comment.user = request.user
+      comment.image = image
+      comment.save() 
+  return redirect('index')
+
+    
