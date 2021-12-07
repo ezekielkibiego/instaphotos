@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from instaapp.models import Image, Profile,User
+from instaapp.models import Image, Like, Profile,User
 
 class ImageTestCase(TestCase):
     def setUp(self):
@@ -78,3 +78,4 @@ class ImageTestCase(TestCase):
             
             user_id=user.id
         )
+
