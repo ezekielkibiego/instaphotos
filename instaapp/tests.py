@@ -78,4 +78,3 @@ class ImageTestCase(TestCase):
             
             user_id=user.id
         )
-
