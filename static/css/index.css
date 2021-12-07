@@ -18,7 +18,20 @@ body{
     font-weight: 700;
 }
 .images{
-    width: 30%;
+    width: 50%;
     height: auto;
-    margin-right: 35%;
+    margin-right: 17%;
+}
+.images2 img{
+    border-radius: 50%;
+    width: 10%;
+    border: 2px solid red;
+    margin-bottom: 5px;
+    
+}
+.images2{
+    border: 1px solid rgba(0, 0, 0, 0.253);
+    padding: 2%;
+    width: 50%;
+    margin-left: 16%;
 }
