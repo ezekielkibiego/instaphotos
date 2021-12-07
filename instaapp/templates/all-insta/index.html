@@ -1,4 +1,5 @@
 {%extends 'all-insta/base.html'%}
+{% load bootstrap4 %}
 {% load crispy_forms_tags %}
 {% block content %}
 {{block.super}}
@@ -34,88 +35,96 @@
         <img src="data:image/jpeg;base64,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"
             alt="">
 
-       
+
     </div>
-        <div class="row">
-            {% for pic in Images %}
+    <div class="row">
+        {% for pic in Images %}
 
-            <div class="col-12">
-                {% if profile.profile_photo %}
+        <div class="col-12">
+            {% if profile.profile_photo %}
 
-                <img src="{{profile.profile_photo.url}}" alt="My profile picture"
-                    style="border-radius: 50%; width: 5%; margin-right: 60%;">
-                {%else%}
-                <img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
-                    class="card-img-top" alt="My profile picture"
-                    style="border-radius: 50%; width: 5%; margin-right: 63%;">
+            <img src="{{profile.profile_photo.url}}" alt="My profile picture"
+                style="border-radius: 50%; width: 5%; margin-right: 60%;">
+            {%else%}
+            <img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
+                class="card-img-top" alt="My profile picture" style="border-radius: 50%; width: 5%; margin-right: 63%;">
 
-                <div style="margin-right: 54%; margin-top: -40px;"><a class='btn btn-default' href="/profile"
-                        >{{pic.user}}</a></div>
+            <div style="margin-right: 54%; margin-top: -40px;"><a class='btn btn-default'
+                    href="/profile">{{pic.user}}</a></div>
+            {% endif %}
+
+
+            <div data-toggle="modal" data-target="#showPicModal{{pic.id}}">
+                <img class="images" src="{{pic.image.url}}" alt="image1">
+            </div>
+            <form action="{% url 'like-image' %}" method='POST'>
+                {% csrf_token %}
+                <input type="hidden" name="image_id" value="{{pic.id}}">
+                {%if user not in pic.liked.all %}
+                <button class="btn-light" type="submit" style="border: none; margin-right: 63%;"><i
+                        class="far fa-heart text-dark"></i>
+                    <i class="fa fa-comment" aria-hidden="true"></i>
+                </button>
+
+                {% else %}
+                <button class="btn-light" type="submit" style="border: none; margin-right: 63%;"><i
+                        class="far fa-heart text-danger"></i>
+                    <i class="fa fa-comment" aria-hidden="true"></i>
+                </button>
+
                 {% endif %}
 
 
-                <div data-toggle="modal" data-target="#showPicModal{{pic.id}}">
-                    <img class="images" src="{{pic.image.url}}" alt="image1">
-                </div>
-                <form action="{% url 'like-image' %}" method='POST'>
-                    {% csrf_token %}
-                    <input type="hidden" name="image_id" value="{{pic.id}}">
-                    {%if user not in pic.liked.all %}
-                    <button class="btn-light" type="submit" style="border: none; margin-right: 63%;"><i
-                            class="far fa-heart text-dark"></i>
-                            <i class="fa fa-comment" aria-hidden="true"></i>
-                        </button>
-                            
-                    {% else %}
-                    <button class="btn-light" type="submit" style="border: none; margin-right: 63%;"><i
-                            class="far fa-heart text-danger"></i>
-                            <i class="fa fa-comment" aria-hidden="true"></i>
-                        </button>
-                            
-                    {% endif %}
-                   
+            </form>
+            <strong style=" margin-right: 60%;">{{pic.liked.all.count}}likes</strong>
+            <div>
+                <p>COMMENTS:</p>
+                {% for comment in pic.saved_comments %}
 
-                </form>
-                <strong style=" margin-right: 60%;">{{pic.liked.all.count}}likes</strong>
-
-                <form action="">
-                    <div class="form-group " style="margin-left: 17%;">
-                        <input type="comment" class="form-control col-md-4" id="exampleFormControlInput1"
-                            placeholder="Add a comment ">
-                    </div>
-                </form>
-
-                <div class="modal fade" id="showPicModal{{pic.id}}" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalCenterName" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-name" id="modalPicName">{{pic.name}}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <img src="{{pic.image.url}}" class="images" alt="{{pic.photo_name}}">
-                                
-                                <div class="row">
-
-
-                                </div>
-
-                                
-
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
+                <p> <span><strong>{{comment.user}}</strong></span>: {{comment.comment}}</p>
 
                 {% endfor %}
-
             </div>
+            <form action="{% url 'comments' image_id=pic.id%}" class="comment-form com" method="post"
+                enctype="multipart/form-data" style="width: 50%; margin-left: 17%;">
+                {% csrf_token%}
+                {% bootstrap_form form %}
+                <div class="form-group text-center">
+                    <input type="submit" class="btn btn-primary login-btn" value="Comment">
+                </div>
+                <input type="hidden" name="next" value="{{next}}">
+            </form>
             
 
         </div>
+        <div class="modal fade" id="showPicModal{{pic.id}}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterName" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-name" id="modalPicName">{{pic.photo_name}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="{{pic.image.url}}" class="images4" alt="{{pic.photo_name}}">
+                            <p>COMMENTS:</p>
+                            <p> {% for comment in pic.saved_comments %}
 
-        {% endblock %}
+                            <p> <span><strong>{{comment.user}}</strong></span>: {{comment.comment}}</p>
+
+                            {% endfor %}</p>
+                            <p><strong style=" margin-right: 60%;">{{pic.liked.all.count}}likes</strong></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+
+    </div>
+
+    {% endblock %}
