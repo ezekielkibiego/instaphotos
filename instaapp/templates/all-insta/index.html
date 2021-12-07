@@ -114,6 +114,33 @@
                 {% endfor %}
 
             </div>
+            <div class="col-md-2">
+                <div class="">
+                  <h2>People</h2>
+                </div>
+                <div class="">
+                  {% if all_users %}
+                  {% for person in all_users %}
+                  <div class="row">
+                    <div class="col-md-4">
+                      {% if person.profile.profile_photo.url %}
+                      <p><a href="{% url 'users_profile' person.id  %}"><img src="{{person.profile.profile_photo.url}}"
+                            class="rounded-circle border" alt="profile" style="height: 8vh; width:8vh; border-radius:50%"></a></p>
+                            {% else %}
+                            <i style="font-size:100px;color:#4888BE" class="fa fa-user" aria-hidden="true"></i>
+                            {% endif %}
+                    </div>
+                    <div class="col-md-4">
+                      <p></p><a href="{% url 'users_profile' person.id   %}">
+                        <p class="text-primary">{{person.username}}</p>
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                  {% endfor %}
+                  {% endif %}
+                </div>
+              </div>
 
         </div>
 
