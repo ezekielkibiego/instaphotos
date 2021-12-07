@@ -11,5 +11,6 @@ urlpatterns = [
     path('like/', views.like_image, name='like-image'),
     # path('<slug:slug>/', views.photo_detail, name='photo_detail'),
     path('search/', views.search, name='search'),
+    path('comments/<image_id>', views.comments,name='comments'),
     
 ]
