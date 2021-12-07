@@ -1,6 +1,6 @@
 from django import forms
 from django.db.models import fields
-from instaapp.models import Image,Profile
+from instaapp.models import Image,Comment
 
 class PicImageForm(forms.ModelForm):
     image = forms.ImageField(widget=forms.FileInput(attrs={
@@ -12,4 +12,5 @@ class PicImageForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = ['photo_name','photo_caption','image']
+
 
