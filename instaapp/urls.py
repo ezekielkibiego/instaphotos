@@ -12,5 +12,6 @@ urlpatterns = [
     # path('<slug:slug>/', views.photo_detail, name='photo_detail'),
     path('search/', views.search, name='search'),
     path('comments/<image_id>', views.comments,name='comments'),
+    path('user_profile/<user_id>', views.user_profile,name='user_profile'),
     
 ]
