@@ -1,4 +1,5 @@
 from cloudinary.models import CloudinaryField
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.http  import HttpResponse
 from django.shortcuts import render, get_object_or_404
@@ -18,6 +19,7 @@ def welcome(request):
 def index(request):
 
     Images = Image.objects.all().order_by('-id')
+    users = Profile.objects.all()
     if request.method == 'POST':  
         form = CommentForm(request.POST, request.FILES)
         if form.is_valid():
@@ -29,7 +31,7 @@ def index(request):
     else:
         form = CommentForm()
   
-    return render(request, 'all-insta/index.html',{'Images':Images,'form':form})
+    return render(request, 'all-insta/index.html',{'Images':Images,'form':form,'users':users})
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
@@ -117,4 +119,8 @@ def comments(request,image_id):
       comment.save() 
   return redirect('index')
 
-    
+def user_profile(request,user_id):
+    user_profile = Profile.objects.filter(user_id = user_id).first()
+    images = Image.objects.filter(user_id = user_id)
+
+    return render(request, 'userprofile.html', {'user_profile':user_profile, 'images':images})
