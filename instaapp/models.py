@@ -22,9 +22,6 @@ class Image(models.Model):
       photos = cls.objects.all().order_by('-posted_at')
       return photos
     
-    @property
-    def saved_comments(self):
-      return self.comments.all()
     
     @property
     def saved_likes(self):
@@ -37,6 +34,10 @@ class Image(models.Model):
     
     def delete_post(self):
       self.delete()
+
+    @property
+    def saved_comments(self):
+        return self.comments.all()
     
     def __str__(self):
      return "%s photo" % self.photo_name
@@ -97,28 +98,13 @@ class Like(models.Model):
     def _str_(self):
         return self.value
 
-# class Comment(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     image = models.ForeignKey(Image, on_delete=models.CASCADE)
-#     comment = models.CharField(max_length=50)
-#     comment_date = models.DateTimeField(auto_now_add=True,null=True)
-
-#     def save_comment(self):
-#         self.save()
-
-#     def __str__(self):
-#         return self.comment
-
 class Comment(models.Model):
-    image = models.ForeignKey(Image,on_delete=models.CASCADE,related_name='comments',null=True)
-    name = models.CharField(max_length=80,null=True)
-    body = models.TextField(default=False)
-    created_on = models.DateTimeField(auto_now_add=True,null=True)
-    active = models.BooleanField(default=False)
+    comment = models.CharField(max_length=250,null=True)
+    image = models.ForeignKey(Image,on_delete = models.CASCADE,related_name='comments',null=True)
+    user = models.ForeignKey(User,on_delete = models.CASCADE,related_name='comments',null=True)
 
-    class Meta:
-        ordering = ['created_on']
-
-    def __str__(self):
-        return 'Comment {} by {}'.format(self.body, self.name)
+    @classmethod
+    def display_comment(cls,image_id):
+        comments = cls.objects.filter(image_id = image_id)
+        return comments
 
