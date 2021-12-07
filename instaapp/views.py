@@ -1,6 +1,7 @@
 from cloudinary.models import CloudinaryField
 from django.shortcuts import redirect, render
 from django.http  import HttpResponse
+from django.shortcuts import render, get_object_or_404
 
 import cloudinary
 import cloudinary.uploader
@@ -51,16 +52,20 @@ def save_image(request):
 
 @login_required
 def search(request):
-  if 'search_user' in request.GET and request.GET["search_user"]:
-    search_term = request.GET.get('search_user')
-    users = Profile.search_profiles(search_term)
-    photos = Image.search_photos(search_term)
-    return render(request,'search.html',{"users":users,"photos":photos})
-  else:
-    return render(request,'search.html')
+
+    if 'search' in request.GET and request.GET["search"]:
+        search_term = request.GET.get("search")
+        search_photo = Image.search_by_photo_name(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html',{"message":message,"search_photo": search_photo})
+
+    else:
+        message = "You haven't searched for any user"
+        return render(request, 'search.html',{"message1":message})
 
 @login_required
-def users_profile(request,pk):
+def user_profile(request,pk):
   
   user = user_passes_test.objects.get(pk = pk)
   photos = Image.objects.filter(user = user)
