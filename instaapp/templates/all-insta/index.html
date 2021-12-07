@@ -38,22 +38,25 @@
 
     </div>
     <div class="row">
+        <div class="col-md-8">
         {% for pic in Images %}
 
         <div class="col-12">
             {% if profile.profile_photo %}
-
-            <img src="{{profile.profile_photo.url}}" alt="My profile picture"
-                style="border-radius: 50%; width: 5%; margin-right: 60%;">
+            <div style="margin-right: 54%; margin-top: -40px;"><a class='btn btn-default'
+                href="{% url 'user_profile' pic.user.id %}"><img src="{{profile.profile_photo.url}}" alt="My profile picture"
+                style="border-radius: 50%; width: 5%; margin-right: 70%;"></a></div>
+            
             {%else%}
             <img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
-                class="card-img-top" alt="My profile picture" style="border-radius: 50%; width: 5%; margin-right: 63%;">
+                class="card-img-top" alt="My profile picture" style="border-radius: 50%; width: 5%; margin-right: 73%;">
 
             
             {% endif %}
 
-            <div style="margin-right: 54%; margin-top: -40px;"><a class='btn btn-default'
+            <div style="margin-right: 60%; margin-top: -40px;"><a class='btn btn-default'
                 href="{% url 'user_profile' pic.user.id %}">{{pic.user}}</a></div>
+
             <div data-toggle="modal" data-target="#showPicModal{{pic.id}}">
                 <img class="images" src="{{pic.image.url}}" alt="image1">
             </div>
@@ -124,11 +127,19 @@
 
             {% endfor %}
 
-        {% for user in users %}
-        {{ user.user.username }}
-        <img src="{{user.profile_photo.url}}" class="images4" alt="{{pic.photo_name}}">
-        {% endfor %}
+        </div>
+        <div class="col-md-4">
+            <h1>Suggestions For You</h1>
 
+        <h3>{% for user in users %}
+           <p> 
+            <img src="{{user.profile_photo.url}}" class="images4" alt="{{pic.photo_name}}" style="border-radius: 50%; width: 10%;">
+            {{ user.user.username }}
+            </p>
+            {% endfor %}
+        </h3>
+
+        </div>
     </div>
 
     {% endblock %}
