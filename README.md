@@ -12,7 +12,7 @@ This is an Instagram clone that allows the user(s) to create an account, log in 
 
 ##  Live Link  
  
- https://instaphotos.herokuapp.com/
+ https://instaphotosmega.herokuapp.com/
   
 ## Screenshots 
 
