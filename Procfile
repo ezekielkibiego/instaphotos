@@ -1,1 +1,1 @@
-web: gunicorn photos.wsgi
+web: gunicorn instaproject.wsgi
